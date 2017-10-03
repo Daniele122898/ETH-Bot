@@ -10,7 +10,7 @@ namespace ETH_Bot.Modules
         [Command("ping")]
         public async Task Ping()
         {
-            await ReplyAsync("", embed: Utility.ResultFeedback(new Color(255,255,255), Utility.SuccessLevelEmoji[4], $"Pong! {Context.Client.Latency} ms :ping_pong:"));
+            await ReplyAsync("", embed: Utility.ResultFeedback(Utility.ETHBlue, Utility.SuccessLevelEmoji[4], $"Pong! {Context.Client.Latency} ms :ping_pong:"));
         }
     }
 }

@@ -8,6 +8,7 @@ namespace ETH_Bot.Services
         public const ulong OWNER_ID = 192750776005689344;
         
         public static Discord.Color ETHBlue = new Color(0, 61, 122);
+        public static Discord.Color PurpleEmbed = new Discord.Color(109, 41, 103);
         public static Discord.Color YellowWarningEmbed = new Color(255,204,77);
         public static Discord.Color GreenSuccessEmbed = new Color(119,178,85);
         public static Discord.Color RedFailiureEmbed = new Color(221,46,68);

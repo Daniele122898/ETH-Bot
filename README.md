@@ -7,7 +7,7 @@
     <br><br>
     <img src="https://discordapp.com/api/guilds/364835508989198337/widget.png?style=banner2">
 	<br>
-	Add me on discord to ask for join permission `Serenity#0783`
+	Add me on discord to ask for join permission "Serenity#0783"
 </p>
 
 <hr/>

@@ -50,6 +50,7 @@ namespace ETH_Bot
             var services = new ServiceCollection();
             services.AddSingleton(_client);
             services.AddScoped<CommandService>();
+            services.AddScoped<DownloadService>();
             services.AddSingleton<CommandHandler>();
 
             return new DefaultServiceProviderFactory().CreateServiceProvider(services);

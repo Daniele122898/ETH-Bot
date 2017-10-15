@@ -14,6 +14,7 @@ namespace ETH_Bot.Services
         public static Discord.Color RedFailiureEmbed = new Color(221,46,68);
         public static Discord.Color BlueInfoEmbed = new Color(59,136,195);
         public static string StandardDiscordAvatar = "http://i.imgur.com/tcpgezi.jpg";
+        public static string EthLogo = "https://i.imgur.com/0TgePEu.png";
         public static string[] SuccessLevelEmoji = new string[]
         {
             "✅","⚠","❌","ℹ",""

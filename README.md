@@ -5,9 +5,9 @@
 <p align="center">
     Join the ETH Discord
     <br><br>
-    <a href="https://discord.gg/gVrsHkX">
-        <img src="https://discordapp.com/api/guilds/364835508989198337/widget.png?style=banner2">
-    </a>
+    <img src="https://discordapp.com/api/guilds/364835508989198337/widget.png?style=banner2">
+	<br>
+	Add me on discord to ask for join permission `Serenity#0783`
 </p>
 
 <hr/>

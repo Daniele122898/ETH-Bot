@@ -1,7 +1,7 @@
 
 <hr/>
 <h1 align="center">ETH-Bot</h1>
-<hr/>
+
 <p align="center">
     Join the ETH Discord
     <br><br>

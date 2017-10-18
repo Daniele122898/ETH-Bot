@@ -6,7 +6,9 @@ namespace ETH_Bot.Data.Entities
     public class DiscMath
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Name { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        
+        public string Href { get; set; }
     }
 }

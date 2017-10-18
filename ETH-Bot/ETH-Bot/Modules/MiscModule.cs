@@ -30,13 +30,19 @@ namespace ETH_Bot.Modules
                     x.Value = "`>linalg`\n" +
                               "`>discmath`\n" +
                               "`>algdat`\n" +
-                              "`>eprog`";
+                              "`>eprog`\n" +
+                              "`>sub`";
                 }).AddField(x =>
             {
                 x.IsInline = false;
                 x.Name = "Other";
                 x.Value = "`>ping`\n" +
                           "`>github`";
+            }).AddField(x =>
+            {
+                x.IsInline = false;
+                x.Name = "Reminder";
+                x.Value = "[Read this but use > as prefix](http://git.argus.moe/serenity/SoraBot-v2/wikis/Commands/reminders)";
             }).WithThumbnailUrl(Utility.EthLogo));
         }
     }

@@ -12,6 +12,12 @@ namespace ETH_Bot.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Reminder> Reminders{ get; set; }
         
+        //ScraperData
+        public DbSet<AlgDat> AlgDat { get; set; }
+        public DbSet<DiscMath> DiscMath { get; set; }
+        public DbSet<Eprog> Eprog{ get; set; }
+        public DbSet<LinAlg> LinAlg{ get; set; }
+        
         public EthContext(DbContextOptions<EthContext> options) : base(options)
         {
             
@@ -25,7 +31,7 @@ namespace ETH_Bot.Data
             optionsBuilder.UseMySql(ConfigService.LazyGet("connectionString", true));
         }
 
-        protected override Void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //create models
         }

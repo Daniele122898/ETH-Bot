@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Discord;
+using Discord.Addons.Interactive;
 using Discord.Commands;
 using Discord.WebSocket;
 using ETH_Bot.Data;
@@ -33,6 +34,8 @@ namespace ETH_Bot
             
             //setup command handler
             await serviceProvider.GetRequiredService<CommandHandler>().InitializeAsync(serviceProvider);
+            serviceProvider.GetRequiredService<ReminderService>().Initialize(serviceProvider);
+            serviceProvider.GetRequiredService<SubscribeService>().Initialize(serviceProvider);
 
             //get token
             string token = ConfigService.LazyGet("token", true);
@@ -51,6 +54,8 @@ namespace ETH_Bot
             services.AddScoped<CommandService>();
             services.AddScoped<DownloadService>();
             services.AddSingleton<CommandHandler>();
+            services.AddSingleton<InteractiveService>();
+            services.AddSingleton<SubscribeService>();
             services.AddSingleton<ReminderService>();
             services.AddDbContext<EthContext>(o =>
                 o.UseMySql(ConfigService.LazyGet("connectionString", true)), ServiceLifetime.Transient);

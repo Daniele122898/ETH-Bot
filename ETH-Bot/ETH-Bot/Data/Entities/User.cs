@@ -10,6 +10,8 @@ namespace ETH_Bot.Data.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public ulong UserId { get; set; }
+
+        public bool Subscribed { get; set; }
         
         public virtual List<Reminder> Reminders { get; set;}
     }

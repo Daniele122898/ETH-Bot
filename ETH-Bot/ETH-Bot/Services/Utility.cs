@@ -57,9 +57,10 @@ namespace ETH_Bot.Services
                 {
                     //User not found
                     var addedUser = ethContext.Users.Add(new User() { UserId = id, Reminders = new List<Reminder>()});
+                    return addedUser.Entity;
                 }
 
-                var reminders = ethContext.Reminders.Where(x => x.UserForeignId == id).ToList();
+                var reminders = ethContext.Reminders.Where(x => x.UserForeignId == id).ToList() ?? new List<Reminder>();
                 result.Reminders = reminders;
             }
             catch (Exception e)

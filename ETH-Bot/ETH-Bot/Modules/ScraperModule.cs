@@ -13,7 +13,7 @@ namespace ETH_Bot.Modules
             _downloadService = service;
         }
         
-        [Command("discmath"), Alias("disc")]
+        [Command("discmath"), Alias("disc", "disk", "discmat", "diskmat", "diskmath")]
         public async Task DiscMath()
         {
             await _downloadService.DownloadDiscMath(Context);

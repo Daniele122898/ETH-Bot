@@ -1,5 +1,11 @@
-﻿using Discord;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Discord;
 using Discord.WebSocket;
+using ETH_Bot.Data;
+using ETH_Bot.Data.Entities;
+using ETH_Bot.Data.Entities.SubEntities;
 
 namespace ETH_Bot.Services
 {
@@ -28,6 +34,40 @@ namespace ETH_Bot.Services
                 Title = $"{symbol} {text}"
             };
             return eb;
+        }
+
+        public static User OnlyGetUser(ulong id, EthContext ethContext)
+        {
+            var result = ethContext.Users.FirstOrDefault(x => x.UserId == id);
+            if (result != null)
+            {
+                var reminders = ethContext.Reminders.Where(x => x.UserForeignId == id).ToList();
+                result.Reminders = reminders;
+            }
+            return result;
+        }
+
+        public static User GetOrCreateUser(ulong id, EthContext ethContext)
+        {
+            User result = null;
+            try
+            {
+                result = ethContext.Users.FirstOrDefault(x => x.UserId == id);
+                if (result == null)
+                {
+                    //User not found
+                    var addedUser = ethContext.Users.Add(new User() { UserId = id, Reminders = new List<Reminder>()});
+                }
+
+                var reminders = ethContext.Reminders.Where(x => x.UserForeignId == id).ToList();
+                result.Reminders = reminders;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            ethContext.SaveChanges();
+            return result;
         }
 
         public static EmbedFooterBuilder RequestedBy(SocketUser user)

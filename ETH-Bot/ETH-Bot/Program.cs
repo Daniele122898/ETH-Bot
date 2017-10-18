@@ -3,7 +3,10 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using ETH_Bot.Data;
+using ETH_Bot.Data.Entities.SubEntities;
 using ETH_Bot.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -24,9 +27,7 @@ namespace ETH_Bot
             _client.Log += Log;
             
             //configure Config service
-            ConfigService.InitializeLoader();
-            ConfigService.LoadConfig();
-
+            ConfigService.ConstructLazy();
             //create serviceprovider
             var serviceProvider = ConfigureServices();
             
@@ -34,9 +35,7 @@ namespace ETH_Bot
             await serviceProvider.GetRequiredService<CommandHandler>().InitializeAsync(serviceProvider);
 
             //get token
-            string token = "";
-            ConfigService.GetConfig().TryGetValue("token", out token);
-            
+            string token = ConfigService.LazyGet("token", true);
             //Connect to Discord
             await _client.LoginAsync(TokenType.Bot, token);
             await _client.StartAsync();
@@ -52,6 +51,9 @@ namespace ETH_Bot
             services.AddScoped<CommandService>();
             services.AddScoped<DownloadService>();
             services.AddSingleton<CommandHandler>();
+            services.AddSingleton<ReminderService>();
+            services.AddDbContext<EthContext>(o =>
+                o.UseMySql(ConfigService.LazyGet("connectionString", true)), ServiceLifetime.Transient);
 
             return new DefaultServiceProviderFactory().CreateServiceProvider(services);
         }

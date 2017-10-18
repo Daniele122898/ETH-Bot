@@ -85,7 +85,7 @@ namespace ETH_Bot.Services
                 Color = Utility.ETHBlue,
                 Title = "Introduction to Programming",
                 Footer = Utility.RequestedBy(context.User),
-                Description = "These are all the exercises and solutions. Since this scraper does not include the extra materials [click here to view them](http://www.lst.inf.ethz.ch/education/einfuehrung-in-die-programmierung-i--252-0027-.html)",
+                Description = "These are all the exercises. Since this scraper does not include the extra materials [click here to view them](http://www.lst.inf.ethz.ch/education/einfuehrung-in-die-programmierung-i--252-0027-.html)",
                 ThumbnailUrl = Utility.EthLogo
             };
 

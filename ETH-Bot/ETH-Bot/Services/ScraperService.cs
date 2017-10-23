@@ -46,11 +46,11 @@ namespace ETH_Bot.Services
             foreach (var node in nodes)
             {
                 //this is an Solution
-                if (node.InnerText.StartsWith("B"))
+                if (node.InnerText.StartsWith("Beispiellösung"))
                 {
                     solutions.Add(node);
                 }
-                else
+                else if(node.InnerText.StartsWith("Übungsblatt"))
                 {
                     exercises.Add(node);
                 }
@@ -66,7 +66,8 @@ namespace ETH_Bot.Services
         {
             var web = new HtmlWeb();
             var doc = web.Load(url);
-            var nodes = doc.DocumentNode.SelectNodes("/html/body/div/div[2]/div[2]/table[1]//tr//td//a"); // double slash what you want to completely search
+            var nodes = doc.DocumentNode.SelectNodes("/html/body/div/div[2]/div[2]/table[1]//tr//td//a"); // double slash what you want to completely search         
+            
             
             List<HtmlNode> exercises = new List<HtmlNode>();
             List<HtmlNode> solutions = new List<HtmlNode>();

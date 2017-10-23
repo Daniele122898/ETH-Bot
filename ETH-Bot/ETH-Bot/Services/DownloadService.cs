@@ -21,8 +21,9 @@ namespace ETH_Bot.Services
                 Color = Utility.ETHBlue,
                 Title = "Linear Algebra",
                 Footer = Utility.RequestedBy(context.User),
-                Description = "These are all the exercises and solutions",
-                ThumbnailUrl = Utility.EthLogo
+                Description = "These are all the exercises and solutions.",
+                ThumbnailUrl = Utility.EthLogo,
+                Url = "http://igl.ethz.ch/teaching/linear-algebra/la2017/"
             };
 
             for (int i = 0; i < scraperData.Exercises.Count; i++)
@@ -54,7 +55,8 @@ namespace ETH_Bot.Services
                 Title = "Introduction to Programming",
                 Footer = Utility.RequestedBy(context.User),
                 Description = "These are all the exercises. Since this scraper does not include the extra materials [click here to view them](http://www.lst.inf.ethz.ch/education/einfuehrung-in-die-programmierung-i--252-0027-.html)",
-                ThumbnailUrl = Utility.EthLogo
+                ThumbnailUrl = Utility.EthLogo,
+                Url = "http://www.lst.inf.ethz.ch/education/einfuehrung-in-die-programmierung-i--252-0027-.html"
             };
 
             for (int i = 0; i < scraperData.Exercises.Count; i++)
@@ -63,7 +65,7 @@ namespace ETH_Bot.Services
                 
                 eb.AddField(x =>
                 {
-                    x.Name = $"Exercise {i+1}";
+                    x.Name = $"Exercise {i}";
                     x.IsInline = true;
                     x.Value = $"[View Exercise]({exLink})";
                 });
@@ -83,8 +85,9 @@ namespace ETH_Bot.Services
                 Color = Utility.ETHBlue,
                 Title = "Algorithms and Datastructures",
                 Footer = Utility.RequestedBy(context.User),
-                Description = "These are all the exercises and solutions",
-                ThumbnailUrl = Utility.EthLogo
+                Description = "These are all the exercises and solutions. To also get the coding exercises [click here](https://www.cadmo.ethz.ch/education/lectures/HS17/DA/index.html)",
+                ThumbnailUrl = Utility.EthLogo,
+                Url = "https://www.cadmo.ethz.ch/education/lectures/HS17/DA/index.html"
             };
 
             for (int i = 0; i < scraperData.Exercises.Count; i++)
@@ -97,7 +100,7 @@ namespace ETH_Bot.Services
                 }
                 eb.AddField(x =>
                 {
-                    x.Name = $"Exercise {i+1}";
+                    x.Name = $"Exercise {i}";
                     x.IsInline = true;
                     x.Value = $"[View Exercise]({exLink}){(string.IsNullOrWhiteSpace(solLink) ? "" :$"\n[View Solution]({solLink})")}";
                 });
@@ -117,7 +120,8 @@ namespace ETH_Bot.Services
                 Title = "Discrete Math",
                 Footer = Utility.RequestedBy(context.User),
                 Description = "These are all the exercises and solutions",
-                ThumbnailUrl = Utility.EthLogo
+                ThumbnailUrl = Utility.EthLogo,
+                Url = "http://www.crypto.ethz.ch/teaching/lectures/DM17/"
             };
 
             for (int i = 0; i < scraperData.Exercises.Count; i++)

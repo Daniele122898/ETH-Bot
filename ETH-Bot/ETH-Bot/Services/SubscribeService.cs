@@ -299,7 +299,7 @@ namespace ETH_Bot.Services
                         value += "**New Exercise**\n";
                         foreach (var exercise in algDatFound.Exercises)
                         {
-                            int exNumer = algDat.Exercises.IndexOf(exercise)+1;
+                            int exNumer = algDat.Exercises.IndexOf(exercise);
                             value += $"[View Exercise {exNumer}]({algDatUrl}{exercise.Attributes["href"].Value})\n";
                         }
                     }
@@ -308,7 +308,7 @@ namespace ETH_Bot.Services
                         value += "**New Solution**\n";
                         foreach (var solution in algDatFound.Solutions)
                         {
-                            int solNumer = algDat.Solutions.IndexOf(solution)+1;
+                            int solNumer = algDat.Solutions.IndexOf(solution);
                             value += $"[View Solution {solNumer}]({algDatUrl}{solution.Attributes["href"].Value})\n";
                         }
                     }
@@ -329,7 +329,7 @@ namespace ETH_Bot.Services
                         value += "**New Exercise**\n";
                         foreach (var exercise in eprogFound.Exercises)
                         {
-                            int exNumer = eprog.Exercises.IndexOf(exercise)+1;
+                            int exNumer = eprog.Exercises.IndexOf(exercise);
                             value += $"[View Exercise {exNumer}]({exercise.Attributes["href"].Value})\n";
                         }
                     }

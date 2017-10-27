@@ -226,13 +226,16 @@ namespace ETH_Bot.Services
                 var eb = new EmbedBuilder()
                 {
                     Color = Utility.ETHBlue,
-                    ThumbnailUrl = Utility.EthLogo,
-                    Title = "⏰ Subscriber Alert"
+                    ThumbnailUrl = Utility.EthLogo
                 };
+
+                int foundTypes = 0;
 
                 //found linalg update
                 if (linAlgFound.Exercises.Count > 0 || linAlgFound.Solutions.Count > 0)
                 {
+                    foundTypes++;
+                    eb.Title = "⏰ Lin Alg Alert";
                     string value = "";
                     if (linAlgFound.Exercises.Count > 0)
                     {
@@ -263,6 +266,8 @@ namespace ETH_Bot.Services
                 //found discmath update
                 if (discMathFound.Exercises.Count > 0 || discMathFound.Solutions.Count > 0)
                 {
+                    foundTypes++;
+                    eb.Title = "⏰ Disc Math Alert";
                     string value = "";
                     if (discMathFound.Exercises.Count > 0)
                     {
@@ -293,6 +298,8 @@ namespace ETH_Bot.Services
                 //found algdat update
                 if (algDatFound.Exercises.Count > 0 || algDatFound.Solutions.Count > 0)
                 {
+                    foundTypes++;
+                    eb.Title = "⏰ A & D Alert";
                     string value = "";
                     if (algDatFound.Exercises.Count > 0)
                     {
@@ -323,6 +330,8 @@ namespace ETH_Bot.Services
                 //found eprog update
                 if (eprogFound.Exercises.Count > 0)
                 {
+                    foundTypes++;
+                    eb.Title = "⏰ Eprog Alert";
                     string value = "";
                     if (eprogFound.Exercises.Count > 0)
                     {
@@ -339,6 +348,12 @@ namespace ETH_Bot.Services
                         x.Name = "Eprog";
                         x.Value = value;
                     });
+                }
+                
+                //If more then 1 type of lecture was released then change the title 
+                if (foundTypes > 1)
+                {
+                    eb.Title = "⏰ Subscriber Alert";
                 }
                 
                 //Send Message to all subscribed users

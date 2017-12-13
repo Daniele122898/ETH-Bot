@@ -18,7 +18,6 @@ namespace ETH_Bot.Services
     {
         private Timer _timer;
         private DiscordSocketClient _client;
-        private IServiceProvider _services;
         
         private const int INITIAL_DELAY = 10;
         private const int MINUTE_INTERVAL = 10;
@@ -29,9 +28,8 @@ namespace ETH_Bot.Services
             _client = client;
         }
 
-        public void Initialize(IServiceProvider serviceProvider)
+        public void Initialize()
         {
-            _services = serviceProvider;
             SetTimer();
         }
         
@@ -44,7 +42,7 @@ namespace ETH_Bot.Services
         public async Task Subscribe(SocketCommandContext context)
         {
             User user;
-            using (var ethContext = _services.GetService<EthContext>())
+            using (var ethContext = new EthContext())
             {
                 user = Utility.GetOrCreateUser(context.User.Id, ethContext);
                 user.Subscribed = !user.Subscribed;
@@ -59,7 +57,7 @@ namespace ETH_Bot.Services
         {
             try
             {
-                using (var ethContext = _services.GetService<EthContext>())
+                using (var ethContext = new EthContext())
                 {
                     var subbedUsers = ethContext.Users.Where(x => x.Subscribed).ToList();
                     if(subbedUsers.Count < 1)
@@ -215,7 +213,6 @@ namespace ETH_Bot.Services
                     }
                     
                     //end of scrape
-                    Console.WriteLine("ENDED SCRAPE");
                     //prepare message
                     if (linAlgFound.Exercises.Count == 0 && linAlgFound.Solutions.Count == 0 &&
                         discMathFound.Exercises.Count == 0 && discMathFound.Solutions.Count == 0 &&

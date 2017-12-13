@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using ETH_Bot.Data.Entities;
 using ETH_Bot.Data.Entities.SubEntities;
 using ETH_Bot.Services;
@@ -18,17 +19,24 @@ namespace ETH_Bot.Data
         public DbSet<Eprog> Eprog{ get; set; }
         public DbSet<LinAlg> LinAlg{ get; set; }
         
-        public EthContext(DbContextOptions<EthContext> options) : base(options)
+        public EthContext() : base()
         {
             
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if(optionsBuilder.IsConfigured)
-                return;
+            if (!ConfigService.GetConfig().TryGetValue("connectionString", out var connectionString))
+            {
+                throw new IOException
+                {
+                    Source = "Couldn't find a \"connectionString\" entry in the config.json file. Exiting."
+                };
+            }
 
-            optionsBuilder.UseMySql(ConfigService.LazyGet("connectionString", true));
+            optionsBuilder.UseMySql(connectionString);
+
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

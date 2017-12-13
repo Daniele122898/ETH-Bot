@@ -19,7 +19,6 @@ namespace ETH_Bot.Services
         private Timer _timer;
         private DiscordSocketClient _client;
         private InteractiveService _interactive;
-        private IServiceProvider _services;
 
         public ReminderService(DiscordSocketClient client, InteractiveService interactiveService)
         {
@@ -27,9 +26,8 @@ namespace ETH_Bot.Services
             _interactive = interactiveService;
         }
         
-        public void Initialize(IServiceProvider services)
+        public void Initialize()
         {
-            _services = services;
             SetTimer();
         }
         
@@ -44,7 +42,7 @@ namespace ETH_Bot.Services
 
         public async Task ShowReminders(SocketCommandContext context)
         {
-            using (var ethContext = _services.GetService<EthContext>())
+            using (var ethContext = new EthContext())
             {
                 var userDb = Utility.OnlyGetUser(context.User.Id, ethContext);
                 if (userDb == null || userDb.Reminders.Count == 0)
@@ -82,7 +80,7 @@ namespace ETH_Bot.Services
 
         public async Task RemoveReminder(SocketCommandContext context)
         {
-            using (var ethContext = _services.GetService<EthContext>())
+            using (var ethContext = new EthContext())
             {
                 var userDb = Utility.OnlyGetUser(context.User.Id, ethContext);
                 if (userDb == null || userDb.Reminders.Count == 0)
@@ -168,7 +166,7 @@ namespace ETH_Bot.Services
         
         private async void CheckReminders(Object stateInfo)
         {
-            using (var ethContext = _services.GetService<EthContext>())
+            using (var ethContext = new EthContext())
             {
                 List<Reminder> rems = new List<Reminder>();
                 rems = ethContext.Reminders.ToList();
@@ -200,7 +198,7 @@ namespace ETH_Bot.Services
         public async Task SetReminder(SocketCommandContext context, string message)
         {
             var time = GetTime(message);
-            using (var ethContext = _services.GetService<EthContext>())
+            using (var ethContext = new EthContext())
             {
                 if (time == 0)
                 {
@@ -306,7 +304,7 @@ namespace ETH_Bot.Services
 
         private void ChangeToClosestInterval()
         {
-            using (var ethContext = _services.GetService<EthContext>())
+            using (var ethContext = new EthContext())
             {
                 if (ethContext.Reminders.ToList().Count == 0)
                 {

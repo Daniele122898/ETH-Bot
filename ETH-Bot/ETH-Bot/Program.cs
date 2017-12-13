@@ -4,12 +4,8 @@ using Discord;
 using Discord.Addons.Interactive;
 using Discord.Commands;
 using Discord.WebSocket;
-using ETH_Bot.Data;
-using ETH_Bot.Data.Entities.SubEntities;
 using ETH_Bot.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace ETH_Bot
 {
@@ -34,8 +30,8 @@ namespace ETH_Bot
             
             //setup command handler
             await serviceProvider.GetRequiredService<CommandHandler>().InitializeAsync(serviceProvider);
-            serviceProvider.GetRequiredService<ReminderService>().Initialize(serviceProvider);
-            serviceProvider.GetRequiredService<SubscribeService>().Initialize(serviceProvider);
+            serviceProvider.GetRequiredService<ReminderService>().Initialize();
+            serviceProvider.GetRequiredService<SubscribeService>().Initialize();
 
             //get token
             string token = ConfigService.LazyGet("token", true);
@@ -57,8 +53,9 @@ namespace ETH_Bot
             services.AddSingleton<InteractiveService>();
             services.AddSingleton<SubscribeService>();
             services.AddSingleton<ReminderService>();
-            services.AddDbContext<EthContext>(o =>
-                o.UseMySql(ConfigService.LazyGet("connectionString", true)), ServiceLifetime.Transient);
+            // Disabled to fix MemLeak issues
+            //services.AddDbContext<EthContext>(o =>
+                //o.UseMySql(ConfigService.LazyGet("connectionString", true)), ServiceLifetime.Transient);
 
             return new DefaultServiceProviderFactory().CreateServiceProvider(services);
         }

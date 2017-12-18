@@ -38,10 +38,10 @@ namespace ETH_Bot
                 var message = m as SocketUserMessage;
                 if (message == null) return;
                 if (message.Author.IsBot) return;
-                if (!(message.Channel is SocketGuildChannel)) return;
+                //if (!(message.Channel is SocketGuildChannel)) return;
                 
                 //prefix ends and command starts
-                string prefix = ">";//Utility.GetGuildPrefix(context.Guild, _soraContext);
+                string prefix = ">";
                 
                 int argPos = prefix.Length-1;
                 if(!(message.HasStringPrefix(prefix, ref argPos)|| message.HasMentionPrefix(_client.CurrentUser, ref argPos)))

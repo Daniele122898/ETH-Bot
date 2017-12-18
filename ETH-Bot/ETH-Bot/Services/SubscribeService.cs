@@ -256,7 +256,7 @@ namespace ETH_Bot.Services
                         eb.AddField(x =>
                         {
                             x.IsInline = true;
-                            x.Name = "Lineal Algebra";
+                            x.Name = "Linear Algebra";
                             x.Value = value;
                         });
                     }

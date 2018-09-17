@@ -1,0 +1,42 @@
+{
+  "classes": [
+    {
+      "name": "Linear Algebra",
+      "alias" : ["linalg", "lin alg"],
+      "url": "http://igl.ethz.ch/teaching/linear-algebra/la2017/",
+      "xpath": "/html/body/div/div[2]/div[1]/table[1]//tr//td//a",
+      "exercise": "Serie",
+      "solution": "Lösung",
+      "hasExercise": true,
+      "hasSolution": true,
+      "relative" : true,
+      "addition" : ""
+    },
+    {
+      "name": "Algorithms & Datastructures",
+      "alias" : ["alg dat", "algdat"],
+      "url": "https://www.cadmo.ethz.ch/education/lectures/HS17/DA/index.html",
+      "xpath": "/html/body/div[3]/div/table[2]//tr//td//a",
+      "exercise": "Übungsblatt",
+      "solution": "Beispiellösung",
+      "hasExercise": true,
+      "hasSolution": true,
+      "relative" : true,
+      "addition" : "index.html"
+    },
+    {
+      "name": "Discrete Math",
+      "alias" : ["disc", "discmat", "discmath"],
+      "url": "http://www.crypto.ethz.ch/teaching/lectures/DM17/",
+      "xpath": "//*[@id=\"content\"]/table[4]/tbody/tr//td//a",
+      "exercise": "&Uuml",
+      "solution": "L&ou",
+      "hasExercise": true,
+      "hasSolution": true,
+      "relative" : true,
+      "addition" : ""
+    }
+  ],
+  "name": "HS17-Inf-Bsc"
+
+}

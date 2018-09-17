@@ -49,7 +49,7 @@ namespace ETH_Bot.Services
                 await ethContext.SaveChangesAsync();
             }
             await context.Channel.SendMessageAsync("", embed: Utility.ResultFeedback(Utility.GreenSuccessEmbed, Utility.SuccessLevelEmoji[0],
-                $"Successfully set Subscriber status to {(user.Subscribed ? "TRUE": "FALSE")}"));
+                $"Successfully set Subscriber status to {(user.Subscribed ? "TRUE": "FALSE")}").Build());
 
         }
 
@@ -360,7 +360,7 @@ namespace ETH_Bot.Services
                         var userToNotify = _client.GetUser(user.UserId);
                         if(userToNotify == null)
                             continue;
-                        await (await userToNotify.GetOrCreateDMChannelAsync()).SendMessageAsync("", embed: eb);
+                        await (await userToNotify.GetOrCreateDMChannelAsync()).SendMessageAsync("", embed: eb.Build());
                     }
                 }
             }

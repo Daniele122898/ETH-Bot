@@ -42,7 +42,7 @@ namespace ETH_Bot.Services
                 });
             }
 
-            await context.Channel.SendMessageAsync("", embed: eb);
+            await context.Channel.SendMessageAsync("", embed: eb.Build());
         }
 
         public async Task DownloadEprog(SocketCommandContext context)
@@ -71,7 +71,7 @@ namespace ETH_Bot.Services
                 });
             }
 
-            await context.Channel.SendMessageAsync("", embed: eb);
+            await context.Channel.SendMessageAsync("", embed: eb.Build());
         }
 
         public async Task DownloadAlgDat(SocketCommandContext context)
@@ -106,7 +106,7 @@ namespace ETH_Bot.Services
                 });
             }
 
-            await context.Channel.SendMessageAsync("", embed: eb);
+            await context.Channel.SendMessageAsync("", embed: eb.Build());
         }
         public async Task DownloadDiscMath(SocketCommandContext context)
         {
@@ -141,7 +141,7 @@ namespace ETH_Bot.Services
                 });
             }
 
-            await context.Channel.SendMessageAsync("", embed: eb);
+            await context.Channel.SendMessageAsync("", embed: eb.Build());
         }
     }
 }

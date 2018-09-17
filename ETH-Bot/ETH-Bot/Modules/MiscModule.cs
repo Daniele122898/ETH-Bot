@@ -13,13 +13,13 @@ namespace ETH_Bot.Modules
         [Command("ping")]
         public async Task Ping()
         {
-            await ReplyAsync("", embed: Utility.ResultFeedback(Utility.ETHBlue, Utility.SuccessLevelEmoji[4], $"Pong! {Context.Client.Latency} ms :ping_pong:"));
+            await ReplyAsync("", embed: Utility.ResultFeedback(Utility.ETHBlue, Utility.SuccessLevelEmoji[4], $"Pong! {Context.Client.Latency} ms :ping_pong:").Build());
         }
 
         [Command("github"), Alias("git")]
         public async Task GitHub()
         {
-            await ReplyAsync("", embed: Utility.ResultFeedback(Utility.ETHBlue, Utility.SuccessLevelEmoji[4], $"Find me here").WithUrl("https://github.com/Daniele122898/ETH-Bot"));
+            await ReplyAsync("", embed: Utility.ResultFeedback(Utility.ETHBlue, Utility.SuccessLevelEmoji[4], $"Find me here").WithUrl("https://github.com/Daniele122898/ETH-Bot").Build());
         }
         
         [Command("sys"), Alias("info"), Summary("Gives stats about ETH-Bot")]
@@ -75,7 +75,13 @@ namespace ETH_Bot.Modules
                 x.IsInline = true;
                 x.Value = $"{Context.Client.Latency} ms";
             });
-            await ReplyAsync("", embed: eb);
+            eb.AddField((x) =>
+            {
+                x.Name = "Version";
+                x.IsInline = true;
+                x.Value = $"{ConfigService.GetConfigData("version")}";
+            });
+            await ReplyAsync("", embed: eb.Build());
         }
 
 
@@ -103,7 +109,7 @@ namespace ETH_Bot.Modules
                 x.IsInline = false;
                 x.Name = "Reminder";
                 x.Value = "[Read this but use > as prefix](http://git.argus.moe/serenity/SoraBot-v2/wikis/Commands/reminders)";
-            }).WithThumbnailUrl(Utility.EthLogo));
+            }).WithThumbnailUrl(Utility.EthLogo).Build());
         }
     }
 }

@@ -49,7 +49,7 @@ namespace ETH_Bot.Services
                 {
                     await context.Channel.SendMessageAsync("",
                         embed: Utility.ResultFeedback(Utility.RedFailiureEmbed, Utility.SuccessLevelEmoji[2],
-                            "You have no reminders!"));
+                            "You have no reminders!").Build());
                     return;
                 }
 
@@ -74,7 +74,7 @@ namespace ETH_Bot.Services
                     });
                 }
 
-                await context.Channel.SendMessageAsync("", embed: eb);
+                await context.Channel.SendMessageAsync("", embed: eb.Build());
             }
         }
 
@@ -87,7 +87,7 @@ namespace ETH_Bot.Services
                 {
                     await context.Channel.SendMessageAsync("",
                         embed: Utility.ResultFeedback(Utility.RedFailiureEmbed, Utility.SuccessLevelEmoji[2],
-                            "You have no reminders!"));
+                            "You have no reminders!").Build());
                     return;
                 }
 
@@ -109,7 +109,7 @@ namespace ETH_Bot.Services
                             $"{(orderedReminders[i].Message.Length > 80 ? orderedReminders[i].Message.Remove(80) + "..." : orderedReminders[i].Message)}";
                     });
                 }
-                var msg = await context.Channel.SendMessageAsync("", embed: eb);
+                var msg = await context.Channel.SendMessageAsync("", embed: eb.Build());
                 //var response = await _interactive.WaitForMessage(context.User, context.Channel, TimeSpan.FromSeconds(45));
                 
                 var response = await _interactive.NextMessageAsync(context, true, true, TimeSpan.FromSeconds(45));//TODO test if this listens only to source user and source channel
@@ -118,7 +118,7 @@ namespace ETH_Bot.Services
                 {
                     await context.Channel.SendMessageAsync("",
                         embed: Utility.ResultFeedback(Utility.RedFailiureEmbed, Utility.SuccessLevelEmoji[2],
-                            $"{Utility.GiveUsernameDiscrimComb(context.User)} didn't reply in time :<"));
+                            $"{Utility.GiveUsernameDiscrimComb(context.User)} didn't reply in time :<").Build());
                     return;
                 }
                 int index = 0;
@@ -126,14 +126,14 @@ namespace ETH_Bot.Services
                 {
                     await context.Channel.SendMessageAsync("",
                         embed: Utility.ResultFeedback(Utility.RedFailiureEmbed, Utility.SuccessLevelEmoji[2],
-                            "Only add the Index!"));
+                            "Only add the Index!").Build());
                     return;
                 }
                 if (index > (orderedReminders.Count + 1) || index < 1)
                 {
                     await context.Channel.SendMessageAsync("",
                         embed: Utility.ResultFeedback(Utility.RedFailiureEmbed, Utility.SuccessLevelEmoji[2],
-                            "Invalid Number"));
+                            "Invalid Number").Build());
                     return;
                 }
                 index -= 1;
@@ -142,7 +142,7 @@ namespace ETH_Bot.Services
                 ChangeToClosestInterval();
                 await context.Channel.SendMessageAsync("",
                     embed: Utility.ResultFeedback(Utility.GreenSuccessEmbed, Utility.SuccessLevelEmoji[0],
-                        "Successfully removed reminder"));
+                        "Successfully removed reminder").Build());
             }
         }
         
@@ -185,7 +185,7 @@ namespace ETH_Bot.Services
                         await (await userToRemind.GetOrCreateDMChannelAsync()).SendMessageAsync("",
                             embed: Utility
                                 .ResultFeedback(Utility.PurpleEmbed, Utility.SuccessLevelEmoji[4], $"**Reminder** ⏰")
-                                .WithDescription($"{reminder.Message}"));
+                                .WithDescription($"{reminder.Message}").Build());
                         ethContext.Reminders.Remove(reminder);
                     }
                 }
@@ -203,13 +203,23 @@ namespace ETH_Bot.Services
                 if (time == 0)
                 {
                     await context.Channel.SendMessageAsync("",
-                        embed: Utility.ResultFeedback(Utility.RedFailiureEmbed, Utility.SuccessLevelEmoji[2], "Either the message or the time format was incorrect!").WithDescription($"Example: >remind do this in 3 h 10mins"));
+                        embed: Utility.ResultFeedback(
+                            Utility.RedFailiureEmbed, 
+                            Utility.SuccessLevelEmoji[2], 
+                            "Either the message or the time format was incorrect!")
+                            .WithDescription($"Example: >remind do this in 3 h 10mins")
+                            .Build());
                     return;
                 }
                 if (time == -1)
                 {
                     await context.Channel.SendMessageAsync("",
-                        embed: Utility.ResultFeedback(Utility.RedFailiureEmbed, Utility.SuccessLevelEmoji[2], "You need to add a message to your Reminder!").WithDescription($"Example: >remind do this in 3 h 10mins"));
+                        embed: Utility.ResultFeedback(
+                            Utility.RedFailiureEmbed, 
+                            Utility.SuccessLevelEmoji[2], 
+                            "You need to add a message to your Reminder!")
+                            .WithDescription($"Example: >remind do this in 3 h 10mins")
+                            .Build());
                     return;
                 }
             
@@ -229,7 +239,7 @@ namespace ETH_Bot.Services
                     embed: Utility.ResultFeedback(Utility.GreenSuccessEmbed, Utility.SuccessLevelEmoji[0],
                             "Successfully set Reminder!")
                         .WithDescription(
-                            $"I will remind you to `{msg}` in `{message.Substring(message.LastIndexOf(" in ", StringComparison.OrdinalIgnoreCase) + " in ".Length)}`!"));
+                            $"I will remind you to `{msg}` in `{message.Substring(message.LastIndexOf(" in ", StringComparison.OrdinalIgnoreCase) + " in ".Length)}`!").Build());
                 ChangeToClosestInterval();
             }
         }

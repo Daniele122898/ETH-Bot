@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace ETHBot.Migrations
 {
-    public partial class Initialcommit12 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,9 +12,9 @@ namespace ETHBot.Migrations
                 name: "AlgDat",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Href = table.Column<string>(type: "longtext", nullable: true)
+                    Href = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -26,9 +25,9 @@ namespace ETHBot.Migrations
                 name: "DiscMath",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Href = table.Column<string>(type: "longtext", nullable: true)
+                    Href = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,9 +38,9 @@ namespace ETHBot.Migrations
                 name: "Eprog",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Href = table.Column<string>(type: "longtext", nullable: true)
+                    Href = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,9 +51,9 @@ namespace ETHBot.Migrations
                 name: "LinAlg",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Href = table.Column<string>(type: "longtext", nullable: true)
+                    Href = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,8 +64,8 @@ namespace ETHBot.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<ulong>(type: "bigint unsigned", nullable: false),
-                    Subscribed = table.Column<bool>(type: "bit", nullable: false)
+                    UserId = table.Column<ulong>(nullable: false),
+                    Subscribed = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,11 +76,11 @@ namespace ETHBot.Migrations
                 name: "Reminders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Message = table.Column<string>(type: "longtext", nullable: true),
-                    Time = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UserForeignId = table.Column<ulong>(type: "bigint unsigned", nullable: false)
+                    Time = table.Column<DateTime>(nullable: false),
+                    Message = table.Column<string>(nullable: true),
+                    UserForeignId = table.Column<ulong>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -9,7 +9,7 @@ namespace ETH_Bot.Services
 {
     public class SemesterService
     {
-        public ConcurrentBag<Semester> SemesterData = new ConcurrentBag<Semester>();
+        public ConcurrentBag<Semester> SemesterData { get; private set; } = new ConcurrentBag<Semester>();
         private JsonSerializer _jsonSerializer = new JsonSerializer();
 
         private const string PATH = "ScrapeData/";

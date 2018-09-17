@@ -18,6 +18,7 @@ namespace ETH_Bot.Data
         public DbSet<DiscMath> DiscMath { get; set; }
         public DbSet<Eprog> Eprog{ get; set; }
         public DbSet<LinAlg> LinAlg{ get; set; }
+        public DbSet<Classes> Classes{ get; set; }
         
         public EthContext() : base()
         {
@@ -26,6 +27,9 @@ namespace ETH_Bot.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //optionsBuilder.UseMySql();
+            //return;
+            
             if (!ConfigService.GetConfig().TryGetValue("connectionString", out var connectionString))
             {
                 throw new IOException

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ETH_Bot.Data.Entities.SubEntities
 {
-    public class Semesters
+    public class Semester
     {
         public List<Class> Classes { get; set; }
         public string Name { get; set; }

@@ -35,7 +35,7 @@ namespace ETH_Bot.Services
         
         private void SetTimer()
         {
-            _timer = new Timer(CheckUpdate, null, TimeSpan.FromSeconds(INITIAL_DELAY),
+            _timer = new Timer(CheckSubs, null, TimeSpan.FromSeconds(INITIAL_DELAY),
                 TimeSpan.FromMinutes(MINUTE_INTERVAL));
         }
 
@@ -51,6 +51,11 @@ namespace ETH_Bot.Services
             await context.Channel.SendMessageAsync("", embed: Utility.ResultFeedback(Utility.GreenSuccessEmbed, Utility.SuccessLevelEmoji[0],
                 $"Successfully set Subscriber status to {(user.Subscribed ? "TRUE": "FALSE")}").Build());
 
+        }
+
+        private async void CheckSubs(Object stateInfo)
+        {
+            
         }
 
         private async void CheckUpdate(Object stateInfo)

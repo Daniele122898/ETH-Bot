@@ -3,14 +3,16 @@ using System;
 using ETH_Bot.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ETHBot.Migrations
 {
     [DbContext(typeof(EthContext))]
-    partial class EthContextModelSnapshot : ModelSnapshot
+    [Migration("20180917195141_UnifiedClassesTable")]
+    partial class UnifiedClassesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

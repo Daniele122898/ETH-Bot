@@ -30,6 +30,7 @@ namespace ETH_Bot
             
             //setup command handler
             await serviceProvider.GetRequiredService<CommandHandler>().InitializeAsync(serviceProvider);
+            serviceProvider.GetRequiredService<SemesterService>().Initialize();
             serviceProvider.GetRequiredService<ReminderService>().Initialize();
             serviceProvider.GetRequiredService<SubscribeService>().Initialize();
 
@@ -48,6 +49,7 @@ namespace ETH_Bot
             var services = new ServiceCollection();
             services.AddSingleton(_client);
             services.AddScoped<CommandService>();
+            services.AddScoped<SemesterService>();
             services.AddScoped<DownloadService>();
             services.AddSingleton<CommandHandler>();
             services.AddSingleton<InteractiveService>();

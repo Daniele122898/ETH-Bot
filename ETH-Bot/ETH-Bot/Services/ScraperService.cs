@@ -7,8 +7,6 @@ namespace ETH_Bot.Services
 {
     public static class ScraperService
     {
-        public static List<Semesters> SemesterData = new List<Semesters>();
-
         public static ScraperData Scrape(string url, string xpath, string ex, string sol, bool hasEx, bool hasSol)
         {
             var web = new HtmlWeb();

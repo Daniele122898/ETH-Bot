@@ -18,5 +18,7 @@ namespace ETH_Bot.Data.Entities.SubEntities
         public string Solution { get; set; }
         public bool HasExercise { get; set; }
         public bool HasSolution { get; set; }
+        public bool Relative { get; set; }
+        public string Addition { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace ETH_Bot.Services
             {
                 if (hasEx)
                 {
-                    if (node.InnerText.StartsWith(ex, StringComparison.OrdinalIgnoreCase))
+                    if (node.InnerText.Trim().StartsWith(ex, StringComparison.OrdinalIgnoreCase))
                     {
                         exercises.Add(node);
                         continue;
@@ -31,7 +31,7 @@ namespace ETH_Bot.Services
 
                 if (hasSol)
                 {
-                    if (node.InnerText.StartsWith(sol, StringComparison.OrdinalIgnoreCase))
+                    if (node.InnerText.Trim().StartsWith(sol, StringComparison.OrdinalIgnoreCase))
                     {
                         solutions.Add(node);
                     }

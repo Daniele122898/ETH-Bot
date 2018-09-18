@@ -5,7 +5,6 @@ using Discord;
 using Discord.Commands;
 using ETH_Bot.Data.Entities.SubEntities;
 using ETH_Bot.Services;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ETH_Bot.Modules
 {
@@ -27,20 +26,20 @@ namespace ETH_Bot.Modules
             var eb = new EmbedBuilder()
             {
                 Color = Utility.BlueInfoEmbed,
-                Title = "All Available Semesters and Lectures",
+                Title = "All Available Semesters and Classes",
                 Footer = Utility.RequestedBy(Context.User),
                 ThumbnailUrl = Utility.EthLogo,
             };
             foreach (var semester in av)
             {
-                string lectures = "";
-                semester.Lectures.ForEach(x=> lectures += x.Name+"\n");
-                if (string.IsNullOrWhiteSpace(lectures)) continue;
+                string classes = "";
+                semester.Lectures.ForEach(x=> classes += x.Name+"\n");
+                if (string.IsNullOrWhiteSpace(classes)) continue;
                 eb.AddField(x =>
                 {
                     x.IsInline = false;
                     x.Name = semester.Name;
-                    x.Value = lectures;
+                    x.Value = classes;
                 });
             }
 
@@ -54,23 +53,23 @@ namespace ETH_Bot.Modules
             // find shit in saved jsons
             var av = _semesterService.SemesterData;
             bool foundSem = false;
-            bool foundLec = false;
+            bool foundClass = false;
             foreach (var semester1 in av)
             {
                 if (!semester1.Name.Equals(semester, StringComparison.OrdinalIgnoreCase)) continue;
                 foundSem = true;
-                foreach (var lecture in semester1.Lectures)
+                foreach (var @class in semester1.Lectures)
                 {
-                    if (!lecture.Name.Equals(course, StringComparison.OrdinalIgnoreCase) && lecture.Alias.All(x=> !x.Equals(course, StringComparison.OrdinalIgnoreCase) )) 
+                    if (!@class.Name.Equals(course, StringComparison.OrdinalIgnoreCase) && @class.Alias.All(x=> !x.Equals(course, StringComparison.OrdinalIgnoreCase) )) 
                         continue;
 
-                    foundLec = true;
+                    foundClass = true;
                     // scrape class
                     ScraperData data = new ScraperData();
                     try
                     {
-                        data = ScraperService.Scrape(lecture.Url, lecture.Xpath, lecture.Exercise, lecture.Solution,
-                            lecture.HasExercise, lecture.HasSolution);
+                        data = ScraperService.Scrape(@class.Url, @class.Xpath, @class.Exercise, @class.Solution,
+                            @class.HasExercise, @class.HasSolution);
                     }
                     catch (Exception)
                     {
@@ -85,27 +84,27 @@ namespace ETH_Bot.Modules
                     var eb = new EmbedBuilder()
                     {
                         Color = Utility.ETHBlue,
-                        Title = lecture.Name,
+                        Title = @class.Name,
                         Footer = Utility.RequestedBy(Context.User),
                         Description = "These are all the exercises and solutions.",
                         ThumbnailUrl = Utility.EthLogo,
-                        Url = lecture.Url
+                        Url = @class.Url
                     };
                     
                     for (int i = 0; i < data.Exercises.Count; i++)
                     {
-                        var exLink = (lecture.Relative ? 
-                                         (string.IsNullOrWhiteSpace(lecture.Addition) ? 
-                                             lecture.Url : 
-                                             lecture.Url.Replace(lecture.Addition, "")) : "") 
+                        var exLink = (@class.Relative ? 
+                                         (string.IsNullOrWhiteSpace(@class.Addition) ? 
+                                             @class.Url : 
+                                             @class.Url.Replace(@class.Addition, "")) : "") 
                                      + data.Exercises[i].Attributes["href"].Value;
                         string solLink = null;
                         if (i < data.Solutions.Count)
                         {
-                            solLink = (lecture.Relative ? 
-                                          (string.IsNullOrWhiteSpace(lecture.Addition) ? 
-                                              lecture.Url :
-                                              lecture.Url.Replace(lecture.Addition, "")) : "") 
+                            solLink = (@class.Relative ? 
+                                          (string.IsNullOrWhiteSpace(@class.Addition) ? 
+                                              @class.Url :
+                                              @class.Url.Replace(@class.Addition, "")) : "") 
                                       + data.Solutions[i].Attributes["href"].Value;
                         }
                         eb.AddField(x =>
@@ -120,12 +119,12 @@ namespace ETH_Bot.Modules
                 }
             }
 
-            if (!foundSem || !foundLec)
+            if (!foundSem || !foundClass)
             {
                 await ReplyAsync("", embed: Utility.ResultFeedback(
                     Utility.RedFailiureEmbed,
                     Utility.SuccessLevelEmoji[2], 
-                    "Couldn't find Semester or Lecture!")
+                    "Couldn't find Semester or Class!")
                 .Build());
             }
         }

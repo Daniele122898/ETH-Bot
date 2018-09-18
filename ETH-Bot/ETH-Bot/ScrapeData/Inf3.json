@@ -1,0 +1,29 @@
+{
+  "lectures": [
+    {
+      "name": "Analysis II",
+      "alias" : ["anal2", "anal 2", "analysis 2"],
+      "url": "https://metaphor.ethz.ch/x/2018/hs/401-0213-16L/",
+      "xpath": "/html/body/div[2]/table[2]/tbody/tr//td//a",
+      "exercise": "Serie",
+      "solution": "L&ou",
+      "hasExercise": true,
+      "hasSolution": true,
+      "relative" : true,
+      "addition" : ""
+    },
+    {
+      "name": "Numerical Methods for CSE",
+      "alias" : ["num", "numer"],
+      "url": "https://metaphor.ethz.ch/x/2018/hs/401-0663-00L/",
+      "xpath": "/html/body/div//a",
+      "exercise": "Exercises ",
+      "solution": "Solutions ",
+      "hasExercise": true,
+      "hasSolution": true,
+      "relative" : true,
+      "addition" : ""
+    }
+  ],
+  "name": "Inf3"
+}

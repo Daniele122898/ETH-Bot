@@ -10,10 +10,29 @@ namespace ETH_Bot.Modules
 {
     public class MiscModule : ModuleBase<SocketCommandContext>
     {
+        private SemesterService _semesterService;
+
+        public MiscModule(SemesterService semesterService)
+        {
+            _semesterService = semesterService;
+        }
+        
         [Command("ping")]
         public async Task Ping()
         {
             await ReplyAsync("", embed: Utility.ResultFeedback(Utility.ETHBlue, Utility.SuccessLevelEmoji[4], $"Pong! {Context.Client.Latency} ms :ping_pong:").Build());
+        }
+
+        [Command("reloadjson"), Alias("refresh")]
+        [RequireOwner]
+        public async Task ReloadSemesterData()
+        {
+            await _semesterService.ReloadData();
+            await ReplyAsync("", embed: Utility.ResultFeedback(
+                Utility.GreenSuccessEmbed,
+                Utility.SuccessLevelEmoji[0],
+                "Successfully reloaded JSONs!")
+            .Build());
         }
 
         [Command("github"), Alias("git")]

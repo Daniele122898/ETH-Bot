@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -34,20 +35,30 @@ namespace ETH_Bot.Services
             }
         }
 
-        public void ReloadData()
+        public async void ReloadData()
         {
             // load all jsons
             foreach (var file in Directory.GetFiles(PATH))
             {
-                using (StreamReader sr = File.OpenText(file))
-                using (JsonReader reader = new JsonTextReader(sr))
+                // if a json file is faulty, lets not crash the bot
+                try
                 {
-                    var data = _jsonSerializer.Deserialize<Semester>(reader);
-                    if (data != null)
+                    using (StreamReader sr = File.OpenText(file))
+                    using (JsonReader reader = new JsonTextReader(sr))
                     {
-                        SemesterData.Add(data);
+                        var data = _jsonSerializer.Deserialize<Semester>(reader);
+                        if (data != null)
+                        {
+                            SemesterData.Add(data);
+                        }
                     }
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    await SentryService.SendMessage("Failed to Load JSON SEMESTER!\n" + e.ToString());
+                }
+                
             }
         }
 

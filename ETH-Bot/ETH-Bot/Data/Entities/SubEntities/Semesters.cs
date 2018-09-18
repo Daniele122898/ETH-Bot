@@ -4,11 +4,11 @@ namespace ETH_Bot.Data.Entities.SubEntities
 {
     public class Semester
     {
-        public List<Class> Classes { get; set; }
+        public List<Lecture> Lectures { get; set; }
         public string Name { get; set; }
     }
 
-    public class @Class
+    public class Lecture
     {
         public string Name { get; set; }
         public string[] Alias { get; set; }

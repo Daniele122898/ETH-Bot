@@ -136,29 +136,5 @@ namespace ETH_Bot.Modules
                 .Build());
             }
         }
-        
-        [Command("discmath"), Alias("disc", "disk", "discmat", "diskmat", "diskmath")]
-        public async Task DiscMath()
-        {
-            await _downloadService.DownloadDiscMath(Context);
-        }
-        
-        [Command("algdat"), Alias("alg" ,"dat", "a&d" ,"ad")]
-        public async Task AlgDat()
-        {
-            await _downloadService.DownloadAlgDat(Context);
-        }
-        
-        [Command("eprog")]
-        public async Task Eprog()
-        {
-            await _downloadService.DownloadEprog(Context);
-        }
-        
-        [Command("linalg"), Alias("lin")]
-        public async Task LinAlg()
-        {
-            await _downloadService.DownloadLinAlg(Context);
-        }
     }
 }

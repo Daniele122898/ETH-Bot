@@ -112,11 +112,7 @@ namespace ETH_Bot.Modules
                 {
                     x.IsInline = false;
                     x.Name = "Scraper";
-                    x.Value = "`>linalg`\n" +
-                              "`>discmath`\n" +
-                              "`>algdat`\n" +
-                              "`>eprog`\n" +
-                              "`>sub`";
+                    x.Value = "`>scrape semester lecture";
                 }).AddField(x =>
             {
                 x.IsInline = false;

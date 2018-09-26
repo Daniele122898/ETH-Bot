@@ -58,6 +58,7 @@ namespace ETH_Bot.Services
             
         }
 
+        /*
         private async void CheckUpdate(Object stateInfo)
         {
             try
@@ -374,6 +375,6 @@ namespace ETH_Bot.Services
                 Console.WriteLine(e);
             }
             
-        }
+        }*/
     }
 }

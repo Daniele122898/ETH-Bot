@@ -23,6 +23,18 @@
       "hasSolution": true,
       "relative" : true,
       "addition" : ""
+    },
+    {
+      "name": "Theoretische Informatik",
+      "alias" : ["TI", "theoinf"],
+      "url": "http://www.ita.inf.ethz.ch/theoInf18/",
+      "xpath": "/html/body/div/div[4]/table[2]",
+      "exercise": "&Uuml;bungsblatt ",
+      "solution": "Solutions ",
+      "hasExercise": true,
+      "hasSolution": false,
+      "relative" : true,
+      "addition" : ""
     }
   ],
   "name": "Inf3"

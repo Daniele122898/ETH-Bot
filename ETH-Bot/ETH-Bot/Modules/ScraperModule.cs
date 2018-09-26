@@ -58,9 +58,9 @@ namespace ETH_Bot.Modules
             {
                 if (!semester1.Name.Equals(semester, StringComparison.OrdinalIgnoreCase)) continue;
                 foundSem = true;
-                foreach (var @class in semester1.Lectures)
+                foreach (var lecture in semester1.Lectures)
                 {
-                    if (!@class.Name.Equals(course, StringComparison.OrdinalIgnoreCase) && @class.Alias.All(x=> !x.Equals(course, StringComparison.OrdinalIgnoreCase) )) 
+                    if (!lecture.Name.Equals(course, StringComparison.OrdinalIgnoreCase) && lecture.Alias.All(x=> !x.Equals(course, StringComparison.OrdinalIgnoreCase) )) 
                         continue;
 
                     foundClass = true;
@@ -68,8 +68,8 @@ namespace ETH_Bot.Modules
                     ScraperData data = new ScraperData();
                     try
                     {
-                        data = ScraperService.Scrape(@class.Url, @class.Xpath, @class.Exercise, @class.Solution,
-                            @class.HasExercise, @class.HasSolution);
+                        data = ScraperService.Scrape(lecture.Url, lecture.Xpath, lecture.Exercise, lecture.Solution,
+                            lecture.HasExercise, lecture.HasSolution);
                     }
                     catch (Exception)
                     {
@@ -84,28 +84,36 @@ namespace ETH_Bot.Modules
                     var eb = new EmbedBuilder()
                     {
                         Color = Utility.ETHBlue,
-                        Title = @class.Name,
+                        Title = lecture.Name,
                         Footer = Utility.RequestedBy(Context.User),
                         Description = "These are all the exercises and solutions.",
                         ThumbnailUrl = Utility.EthLogo,
-                        Url = @class.Url
+                        Url = lecture.Url
                     };
                     
                     for (int i = 0; i < data.Exercises.Count; i++)
                     {
-                        var exLink = (@class.Relative ? 
-                                         (string.IsNullOrWhiteSpace(@class.Addition) ? 
-                                             @class.Url : 
-                                             @class.Url.Replace(@class.Addition, "")) : "") 
-                                     + data.Exercises[i].Attributes["href"].Value;
+                        // since its possible to have a link without href if ur a fucking retarded french baguette eating idiot.
+                        var href = data.Exercises[i].Attributes["href"]?.Value;
+                        if (href == null) continue;
+                        var exLink = (lecture.Relative ? 
+                                         (string.IsNullOrWhiteSpace(lecture.Addition) ? 
+                                             lecture.Url : 
+                                             lecture.Url.Replace(lecture.Addition, "")) : "") 
+                                     + href;
                         string solLink = null;
                         if (i < data.Solutions.Count)
                         {
-                            solLink = (@class.Relative ? 
-                                          (string.IsNullOrWhiteSpace(@class.Addition) ? 
-                                              @class.Url :
-                                              @class.Url.Replace(@class.Addition, "")) : "") 
-                                      + data.Solutions[i].Attributes["href"].Value;
+                            href = data.Solutions[i].Attributes["href"]?.Value;
+                            if (href != null)
+                            {
+                                solLink = (lecture.Relative
+                                              ? (string.IsNullOrWhiteSpace(lecture.Addition)
+                                                  ? lecture.Url
+                                                  : lecture.Url.Replace(lecture.Addition, ""))
+                                              : "")
+                                          + href;
+                            }
                         }
                         eb.AddField(x =>
                         {
@@ -124,7 +132,7 @@ namespace ETH_Bot.Modules
                 await ReplyAsync("", embed: Utility.ResultFeedback(
                     Utility.RedFailiureEmbed,
                     Utility.SuccessLevelEmoji[2], 
-                    "Couldn't find Semester or Class!")
+                    "Couldn't find Semester or Lecture!")
                 .Build());
             }
         }
